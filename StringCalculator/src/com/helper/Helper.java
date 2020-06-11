@@ -34,5 +34,21 @@ public class Helper {
 	public static String encloseWithEscapeSequence(String delimiter) {
 		return "\\Q" + delimiter + "\\E";
 	}
+	
+	public static void throwNegativeNumException(String negativeNumbers) throws Exception {
+		throw new Exception("\"negatives not allowed-\"" + negativeNumbers);
+	}
+	
+	public static void checkForNegativeNumbers(int arr[]) throws Exception {
+		String negativeValues = "";
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i] < 0) {
+				negativeValues = negativeValues + arr[i] + " ";
+			}
+		}
+		if (negativeValues != "") {
+			throwNegativeNumException(negativeValues);
+		}
+	}
 
 }

@@ -23,6 +23,11 @@ public class StringCalculatorTest {
 	public void testAdd(String actual, int expected) throws Exception {
 		Assert.assertEquals(calculator.add(actual), expected);
 	}
+	
+	@Test(dataProvider = "dataInputNegativeNumbers", expectedExceptions = Exception.class, expectedExceptionsMessageRegExp = "\"negatives not allowed-\".*")
+	public void testAddWithNegativeNumber(String input) throws Exception {
+		calculator.add(input);
+	}
 
 	@DataProvider
 	public Object[][] datainput() {
@@ -40,6 +45,27 @@ public class StringCalculatorTest {
 				{ TestHelper.generateString(arr, Arrays.copyOfRange(delimiters, 0, 2)), TestHelper.getSum(arr) },
 				{ TestHelper.getCustomDelimiterString(arr, Arrays.copyOfRange(delimiters, 2, 3)),
 						TestHelper.getSum(arr) } };
+		return data;
+	}
+	
+	@DataProvider
+	public Object[] dataInputNegativeNumbers() {
+
+		int randomNegNo = TestHelper.getRandomNumber(100) - 10000; // generating negative number
+
+		String oneNegNo = TestHelper.toString(randomNegNo);
+		String multipleNegNos = TestHelper.toString(randomNegNo);
+		for (int i = 1; i < TestHelper.getRandomNumber(10) + 3; i++) {
+			multipleNegNos = multipleNegNos.concat(",").concat(TestHelper.toString(TestHelper.getRandomNumber(100) - 10000));
+		}
+
+		String posAndNegNos = TestHelper.toString(TestHelper.getRandomNumber(100));
+		for (int i = 1; i < TestHelper.getRandomNumber(10) + 3; i++) {
+			posAndNegNos = posAndNegNos.concat(",").concat(TestHelper.toString(TestHelper.getRandomNumber(1000))).concat(",")
+					.concat(TestHelper.toString(TestHelper.getRandomNumber(100) - 10000));
+		}
+
+		Object[] data = { oneNegNo, multipleNegNos, posAndNegNos };
 		return data;
 	}
 
