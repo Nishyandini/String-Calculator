@@ -26,14 +26,16 @@ public class StringCalculatorTest {
 	public Object[][] datainput() {
 
 		int arrLength = TestHelper.getRandomNumber(1000) + 3, arr[] = new int[arrLength]; // Generates array length with
-																						// range(3,1000)
+																							// range(3,1000)
 		for (int i = 0; i < arrLength; i++) {
 			arr[i] = TestHelper.getRandomNumber(10000);
 		}
+
+		String[] delimiters = { ",", "\n" };
 		String twoNumbers = TestHelper.toString(arr[0]).concat(",").concat(TestHelper.toString(arr[1]));
 
 		Object[][] data = { { "", 0 }, { TestHelper.toString(arr[0]), arr[0] }, { twoNumbers, arr[0] + arr[1] },
-				{ TestHelper.generateString(arr, ","), TestHelper.getSum(arr) } };
+				{ TestHelper.generateString(arr, delimiters), TestHelper.getSum(arr) } };
 		return data;
 	}
 

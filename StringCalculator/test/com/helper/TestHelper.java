@@ -13,10 +13,10 @@ public class TestHelper {
 		return Integer.toString(value);
 	}
 	
-	public static String generateString(int arr[], String delimiters) {
+	public static String generateString(int arr[], String[] delimiters) {
 		StringBuilder result = new StringBuilder("");
 		for (int i = 0; i < arr.length - 1; i++) {
-			result = result.append(arr[i]).append(delimiters);
+			result = result.append(arr[i]).append(delimiters[i % delimiters.length]);
 		}
 		result.append(arr[arr.length - 1]);
 		return result.toString();

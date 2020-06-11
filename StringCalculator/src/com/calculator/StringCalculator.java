@@ -25,7 +25,7 @@ public class StringCalculator {
 		if (match.matches()) {
 			return Helper.toInteger(numbers);
 		} else if (match.lookingAt()) {
-			int numberArr[] = Helper.toIntArray(numbers.split(","));
+			int numberArr[] = Helper.toIntArray(numbers.split("[,\n]"));
 			return Helper.getTotalSum(numberArr);
 		}
 
