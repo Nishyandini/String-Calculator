@@ -25,12 +25,15 @@ public class StringCalculatorTest {
 	@DataProvider
 	public Object[][] datainput() {
 
-		int num1 = TestHelper.getRandomNumber(100);
-		int num2 = TestHelper.getRandomNumber(10000);
+		int arrLength = TestHelper.getRandomNumber(1000) + 3, arr[] = new int[arrLength]; // Generates array length with
+																						// range(3,1000)
+		for (int i = 0; i < arrLength; i++) {
+			arr[i] = TestHelper.getRandomNumber(10000);
+		}
+		String twoNumbers = TestHelper.toString(arr[0]).concat(",").concat(TestHelper.toString(arr[1]));
 
-		String twoNumbers = TestHelper.toString(num1).concat(",").concat(TestHelper.toString(num2));
-
-		Object[][] data = { { "", 0 }, { TestHelper.toString(num1), num1 }, { twoNumbers, num1 + num2 } };
+		Object[][] data = { { "", 0 }, { TestHelper.toString(arr[0]), arr[0] }, { twoNumbers, arr[0] + arr[1] },
+				{ TestHelper.generateString(arr, ","), TestHelper.getSum(arr) } };
 		return data;
 	}
 
