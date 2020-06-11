@@ -14,7 +14,7 @@ public class Helper {
 	public static int toInteger(String str) {
 		return Integer.parseInt(str);
 	}
-	
+
 	public static int[] toIntArray(String[] array) {
 		int[] intArray = new int[array.length];
 		for (int i = 0; i < array.length; i++) {
@@ -22,13 +22,17 @@ public class Helper {
 		}
 		return intArray;
 	}
-	
+
 	public static int getTotalSum(int[] numbers) {
 		int total = 0;
 		for (int number : numbers) {
 			total = total + number;
 		}
 		return total;
+	}
+
+	public static String encloseWithEscapeSequence(String delimiter) {
+		return "\\Q" + delimiter + "\\E";
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.calculator.test;
 
+import java.util.Arrays;
+
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -31,11 +33,13 @@ public class StringCalculatorTest {
 			arr[i] = TestHelper.getRandomNumber(10000);
 		}
 
-		String[] delimiters = { ",", "\n" };
+		String[] delimiters = { ",", "\n", "%" };
 		String twoNumbers = TestHelper.toString(arr[0]).concat(",").concat(TestHelper.toString(arr[1]));
 
 		Object[][] data = { { "", 0 }, { TestHelper.toString(arr[0]), arr[0] }, { twoNumbers, arr[0] + arr[1] },
-				{ TestHelper.generateString(arr, delimiters), TestHelper.getSum(arr) } };
+				{ TestHelper.generateString(arr, Arrays.copyOfRange(delimiters, 0, 2)), TestHelper.getSum(arr) },
+				{ TestHelper.getCustomDelimiterString(arr, Arrays.copyOfRange(delimiters, 2, 3)),
+						TestHelper.getSum(arr) } };
 		return data;
 	}
 

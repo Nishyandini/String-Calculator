@@ -29,5 +29,10 @@ public class TestHelper {
 		}	
 		return total;
 	}
+	
+	public static String getCustomDelimiterString(int arr[], String[] delimiters) {
+		String startString = "//", endString = "" + "\n" + generateString(arr, delimiters);
+		return new StringBuilder().append(startString).append(delimiters[0]).append(endString).toString();
+	}
 
 }
