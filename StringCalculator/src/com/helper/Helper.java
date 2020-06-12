@@ -23,10 +23,11 @@ public class Helper {
 		return intArray;
 	}
 
-	public static int getTotalSum(int[] numbers) {
+	public static int getSumOfNosLessThan1001(int[] numbers) {
 		int total = 0;
 		for (int number : numbers) {
-			total = total + number;
+			if(number <= 1000)
+				total = total + number;
 		}
 		return total;
 	}

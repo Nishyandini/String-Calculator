@@ -41,10 +41,10 @@ public class StringCalculatorTest {
 		String[] delimiters = { ",", "\n", "%" };
 		String twoNumbers = TestHelper.toString(arr[0]).concat(",").concat(TestHelper.toString(arr[1]));
 
-		Object[][] data = { { "", 0 }, { TestHelper.toString(arr[0]), arr[0] }, { twoNumbers, arr[0] + arr[1] },
-				{ TestHelper.generateString(arr, Arrays.copyOfRange(delimiters, 0, 2)), TestHelper.getSum(arr) },
+		Object[][] data = { { "", 0 }, { TestHelper.toString(arr[0]), arr[0] }, { twoNumbers, TestHelper.getSumOfNosLessThan1001(Arrays.copyOfRange(arr, 0, 2)) },
+				{ TestHelper.generateString(arr, Arrays.copyOfRange(delimiters, 0, 2)), TestHelper.getSumOfNosLessThan1001(arr) },
 				{ TestHelper.getCustomDelimiterString(arr, Arrays.copyOfRange(delimiters, 2, 3)),
-						TestHelper.getSum(arr) } };
+						TestHelper.getSumOfNosLessThan1001(arr) } };
 		return data;
 	}
 	

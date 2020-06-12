@@ -31,7 +31,7 @@ public class StringCalculator {
 		} else if (match.lookingAt()) {
 			int numberArr[] = Helper.toIntArray(numbers.split("[,\n]"));
 			Helper.checkForNegativeNumbers(numberArr);
-			return Helper.getTotalSum(numberArr);
+			return Helper.getSumOfNosLessThan1001(numberArr);
 		}
 
 		/*
@@ -49,7 +49,7 @@ public class StringCalculator {
 			String replaced = numbers.replaceAll(DELIMITER_WITHOUT_BRACKETS_PATTERN, "");
 			int numArr[] = Helper.toIntArray(replaced.split(delimiter));
 			Helper.checkForNegativeNumbers(numArr);
-			return Helper.getTotalSum(numArr);
+			return Helper.getSumOfNosLessThan1001(numArr);
 		}
 
 		/*

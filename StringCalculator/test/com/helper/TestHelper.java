@@ -22,10 +22,11 @@ public class TestHelper {
 		return result.toString();
 	}
 	
-	public static int getSum(int arr[]) {
+	public static int getSumOfNosLessThan1001(int arr[]) {
 		int total = 0;
 		for (int i = 0; i < arr.length; i++) {
-			total = total + arr[i];
+			if(arr[i] <= 1000) // number greater than 1000 is ignored
+				total = total + arr[i];
 		}	
 		return total;
 	}
