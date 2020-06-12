@@ -38,13 +38,15 @@ public class StringCalculatorTest {
 			arr[i] = TestHelper.getRandomNumber(10000);
 		}
 
-		String[] delimiters = { ",", "\n", "%" };
+		String[] delimiters = { ",", "\n", "%" , "***@#%"};
 		String twoNumbers = TestHelper.toString(arr[0]).concat(",").concat(TestHelper.toString(arr[1]));
 
 		Object[][] data = { { "", 0 }, { TestHelper.toString(arr[0]), arr[0] }, { twoNumbers, TestHelper.getSumOfNosLessThan1001(Arrays.copyOfRange(arr, 0, 2)) },
 				{ TestHelper.generateString(arr, Arrays.copyOfRange(delimiters, 0, 2)), TestHelper.getSumOfNosLessThan1001(arr) },
 				{ TestHelper.getCustomDelimiterString(arr, Arrays.copyOfRange(delimiters, 2, 3)),
-						TestHelper.getSumOfNosLessThan1001(arr) } };
+						TestHelper.getSumOfNosLessThan1001(arr) } , 
+				{TestHelper.getCustomDelimiterString(arr, Arrays.copyOfRange(delimiters, 3, 4)),
+							TestHelper.getSumOfNosLessThan1001(arr)} };
 		return data;
 	}
 	
