@@ -23,7 +23,7 @@ public class StringCalculatorTest {
 	public void testAdd(String actual, int expected) throws Exception {
 		Assert.assertEquals(calculator.add(actual), expected);
 	}
-	
+
 	@Test(dataProvider = "dataInputNegativeNumbers", expectedExceptions = Exception.class, expectedExceptionsMessageRegExp = "\"negatives not allowed-\".*")
 	public void testAddWithNegativeNumber(String input) throws Exception {
 		calculator.add(input);
@@ -38,18 +38,22 @@ public class StringCalculatorTest {
 			arr[i] = TestHelper.getRandomNumber(10000);
 		}
 
-		String[] delimiters = { ",", "\n", "%" , "***@#%"};
+		String[] delimiters = { ",", "\n", "%", "***@#%", "***", "&" , "!!!" };
 		String twoNumbers = TestHelper.toString(arr[0]).concat(",").concat(TestHelper.toString(arr[1]));
 
-		Object[][] data = { { "", 0 }, { TestHelper.toString(arr[0]), arr[0] }, { twoNumbers, TestHelper.getSumOfNosLessThan1001(Arrays.copyOfRange(arr, 0, 2)) },
-				{ TestHelper.generateString(arr, Arrays.copyOfRange(delimiters, 0, 2)), TestHelper.getSumOfNosLessThan1001(arr) },
-				{ TestHelper.getCustomDelimiterString(arr, Arrays.copyOfRange(delimiters, 2, 3)),
-						TestHelper.getSumOfNosLessThan1001(arr) } , 
-				{TestHelper.getCustomDelimiterString(arr, Arrays.copyOfRange(delimiters, 3, 4)),
-							TestHelper.getSumOfNosLessThan1001(arr)} };
+		Object[][] data = { { "", 0 }, { TestHelper.toString(arr[0]), arr[0] },
+				{ twoNumbers, TestHelper.getSumOfNosLessThan1001(Arrays.copyOfRange(arr, 0, 2)) },
+				{ TestHelper.generateString(arr, Arrays.copyOfRange(delimiters, 0, 2)),
+						TestHelper.getSumOfNosLessThan1001(arr) },
+				{ TestHelper.getCustomDelimiterString(arr, Arrays.copyOfRange(delimiters, 2, 3), false),
+						TestHelper.getSumOfNosLessThan1001(arr) },
+				{ TestHelper.getCustomDelimiterString(arr, Arrays.copyOfRange(delimiters, 3, 4), false),
+						TestHelper.getSumOfNosLessThan1001(arr) },
+				{ TestHelper.getCustomDelimiterString(arr, Arrays.copyOfRange(delimiters, 2, 7), true),
+						TestHelper.getSumOfNosLessThan1001(arr) } };
 		return data;
 	}
-	
+
 	@DataProvider
 	public Object[] dataInputNegativeNumbers() {
 
@@ -58,13 +62,14 @@ public class StringCalculatorTest {
 		String oneNegNo = TestHelper.toString(randomNegNo);
 		String multipleNegNos = TestHelper.toString(randomNegNo);
 		for (int i = 1; i < TestHelper.getRandomNumber(10) + 3; i++) {
-			multipleNegNos = multipleNegNos.concat(",").concat(TestHelper.toString(TestHelper.getRandomNumber(100) - 10000));
+			multipleNegNos = multipleNegNos.concat(",")
+					.concat(TestHelper.toString(TestHelper.getRandomNumber(100) - 10000));
 		}
 
 		String posAndNegNos = TestHelper.toString(TestHelper.getRandomNumber(100));
 		for (int i = 1; i < TestHelper.getRandomNumber(10) + 3; i++) {
-			posAndNegNos = posAndNegNos.concat(",").concat(TestHelper.toString(TestHelper.getRandomNumber(1000))).concat(",")
-					.concat(TestHelper.toString(TestHelper.getRandomNumber(100) - 10000));
+			posAndNegNos = posAndNegNos.concat(",").concat(TestHelper.toString(TestHelper.getRandomNumber(1000)))
+					.concat(",").concat(TestHelper.toString(TestHelper.getRandomNumber(100) - 10000));
 		}
 
 		Object[] data = { oneNegNo, multipleNegNos, posAndNegNos };

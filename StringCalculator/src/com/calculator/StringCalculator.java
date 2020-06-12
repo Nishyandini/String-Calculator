@@ -59,9 +59,9 @@ public class StringCalculator {
 		 * negative number.
 		 */
 		match = Helper.getMatcher(STARTS_WITH_NEG_NUM_PATTERN, numbers);
-		if (match.matches()) { 
-			Helper.throwNegativeNumException(numbers); 
-		} else if (match.lookingAt()) { 
+		if (match.matches()) {
+			Helper.throwNegativeNumException(numbers);
+		} else if (match.lookingAt()) {
 			int numberArr[] = Helper.toIntArray(numbers.split("[,\n]"));
 			Helper.checkForNegativeNumbers(numberArr);
 		}
@@ -70,11 +70,20 @@ public class StringCalculator {
 	}
 
 	private int getCustomDelimiterPatternSum(Matcher match, String numbers, String pattern) throws Exception {
-		/*
-		 * Inorder to handle delimiters which have a special meaning in regex,
-		 * delimiters are enclosed with escape sequence
-		 */
-		String delimiter = Helper.encloseWithEscapeSequence(match.group(1));
+		String delimiter = "";
+		if (match.groupCount() >= 2) {
+			String delimitersGroup[] = match.group(2).split("\\]\\[");
+			/*
+			 * Inorder to handle delimiters which have a special meaning in regex,
+			 * delimiters are enclosed with escape sequence
+			 */
+			delimiter = Helper.encloseWithEscapeSequence(delimitersGroup[0]);
+			for (int i = 1; i < delimitersGroup.length; i++) {
+				delimiter = delimiter + "|" + Helper.encloseWithEscapeSequence(delimitersGroup[i]);
+			}
+		} else {
+			delimiter = Helper.encloseWithEscapeSequence(match.group(1));
+		}
 		String replaced = numbers.replaceAll(pattern, "");
 		int numArr[] = Helper.toIntArray(replaced.split(delimiter));
 		Helper.checkForNegativeNumbers(numArr);
